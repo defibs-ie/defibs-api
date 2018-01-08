@@ -5,5 +5,5 @@ from .models import Defib
 class DefibSerializer(serializers.ModelSerializer):
     class Meta:
         model = Defib
-        fields = ('lat', 'lon', 'notes',)
-        read_only_fields = ('lat', 'lon', 'notes',)
+        fields = ('id', 'lat', 'lon', 'notes',)
+        read_only_fields = ('id', 'lat', 'lon', 'notes',)
