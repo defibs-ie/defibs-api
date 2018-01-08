@@ -18,7 +18,7 @@ import defibsapi.get_eb_env
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Load EBS environment variables
-project.get_eb_env.patch_environment()
+defibsapi.get_eb_env.patch_environment()
 
 # Load environment variables
 load_dotenv(find_dotenv())
