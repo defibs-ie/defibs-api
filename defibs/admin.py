@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Defib
+
+class DefibAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Defib, DefibAdmin)
