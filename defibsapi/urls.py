@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
 
+from contributors.views import ContributorViewSet
 from defibs.views import DefibViewSet
 
 router = routers.DefaultRouter()
+router.register(r'contributors', ContributorViewSet, base_name='contributor')
 router.register(r'defibs', DefibViewSet, base_name='defib')
 
 urlpatterns = [
