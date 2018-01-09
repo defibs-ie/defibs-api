@@ -43,6 +43,8 @@ class DetailRetrievalTestCase(APITestCase):
         self.assertIsInstance(response.data, object)
 
     def test_detail_retrieval_returns_expected_keys(self):
-        expected_keys = set(['id', 'lat', 'lon', 'notes', 'address',])
+        expected_keys = set([
+            'id', 'lat', 'lon', 'notes', 'address', 'image',
+        ])
         response = self.client.get(self.url)
         self.assertEqual(set(response.data.keys()), expected_keys)
