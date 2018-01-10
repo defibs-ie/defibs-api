@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Contributor
+
+class ContributorAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Contributor, ContributorAdmin)
