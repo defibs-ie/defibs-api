@@ -7,3 +7,9 @@ class DefibSerializer(serializers.ModelSerializer):
         model = Defib
         fields = ('id', 'lat', 'lon', 'notes', 'address', 'image',)
         read_only_fields = ('id', 'lat', 'lon', 'notes', 'address', 'image',)
+
+
+class SubmissionSerializer(serializers.Serializer):
+    lat = serializers.DecimalField(max_digits=9, decimal_places=6)
+    lon = serializers.DecimalField(max_digits=9, decimal_places=6)
+    notes = serializers.CharField(allow_blank=True, required=False)

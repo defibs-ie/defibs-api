@@ -10,6 +10,7 @@ decorator==4.1.2
 dj-database-url==0.4.2
 Django==2.0.1
 django-cors-headers==2.1.0
+django-smtp-ssl==1.0
 django-storages==1.6.5
 djangorestframework==3.7.7
 docker-py==1.7.2

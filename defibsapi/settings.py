@@ -149,3 +149,16 @@ AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_S3_REGION_NAME = 'eu-west-1'
+
+# Email settings
+SUBMISSION_EMAIL_FROM = os.environ['SUBMISSION_EMAIL_FROM']
+SUBMISSION_EMAIL_TO = os.environ['SUBMISSION_EMAIL_TO']
+EMAIL_BACKEND = os.environ['EMAIL_BACKEND']
+EMAIL_HOST = os.environ['EMAIL_HOST']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+try:
+    EMAIL_PORT = int(os.environ['EMAIL_PORT'])
+except ValueError:  # env var missing or malformed
+    EMAIL_PORT = 25
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'False') == 'True'

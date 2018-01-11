@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core import mail
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -48,3 +50,31 @@ class DetailRetrievalTestCase(APITestCase):
         ])
         response = self.client.get(self.url)
         self.assertEqual(set(response.data.keys()), expected_keys)
+
+
+class SubmissionTestCase(APITestCase):
+    def setUp(self):
+        self.data = {
+            'lat': 0,
+            'lon': 0,
+        }
+        self.url = reverse('defib-submit')
+
+    def test_submission_returns_http_201(self):
+        response = self.client.post(self.url, self.data)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_submission_triggers_an_email(self):
+        response = self.client.post(self.url, self.data)
+        self.assertEqual(len(mail.outbox), 1)
+
+    def test_submission_email_sends_to_expected_recipient(self):
+        expected_recipient = settings.SUBMISSION_EMAIL_TO
+        response = self.client.post(self.url, self.data)
+        sent_mail = mail.outbox[0]
+        self.assertEqual(sent_mail.to[0], expected_recipient)
+
+    def test_missing_data_returns_http_400(self):
+        data = {'lat': 0}
+        response = self.client.post(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
