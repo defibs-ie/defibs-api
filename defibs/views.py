@@ -43,8 +43,10 @@ class DefibViewSet(
     
     def build_message(self, data):
         return (
-            f"Submission from: {data.get('email', '<anonymous@example.com>')}\n"
-            f"Latitude:\n{data['lat']}\n"
+            f"Submission from: {data.get('email', '<anonymous@example.com>')}\n\n"
+            f"Latitude:\n{data['lat']}\n\n"
             f"Longitude:\n{data['lon']}\n\n"
+            "This Google Maps address might work:\n"
+            f"https://google.com/maps/?q={lat}{lon}\n\n"
             f"Notes:\n{data.get('notes', '')}"
         )
