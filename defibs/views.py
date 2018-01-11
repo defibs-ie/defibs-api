@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
@@ -25,12 +25,19 @@ class DefibViewSet(
         if serializer.is_valid(raise_exception=True):
             data = SubmissionSerializer(request.data).data
             message = self.build_message(request.data)
-            send_mail(
+            email = EmailMessage(
                 subject,
                 message,
                 sender,
                 [recipient],
             )
+            # TODO: Calling read() is not a great idea in general, as
+            # it keeps (or duplicates?) the whole file in memory, so
+            # we should probably write to temporary storage first.
+            if 'file' in request.FILES.keys():
+                image = request.FILES['file']
+                email.attach(image.name, image.file.read(), image.content_type)
+            email.send()
             return Response(status=status.HTTP_201_CREATED)
 
     
