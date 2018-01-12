@@ -47,6 +47,6 @@ class DefibViewSet(
             f"Latitude:\n{data['lat']}\n\n"
             f"Longitude:\n{data['lon']}\n\n"
             "This Google Maps address might work:\n"
-            f"https://google.com/maps/?q={data['lat']}{data['lon']}\n\n"
+            f"https://google.com/maps/?q={data['lat']},{data['lon']}\n\n"
             f"Notes:\n{data.get('notes', '')}"
         )
